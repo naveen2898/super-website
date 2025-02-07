@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Section - CRPS Nexus</title>
+  
+  <!-- Swiper.js for Carousel -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  
+  <style>
+    /* Home Section Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #00b4db, #0083b0);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .home-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Image Carousel */
+    .swiper {
+      width: 100%;
+      max-width: 1200px;
+      height: 500px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 50px auto;
+    }
+
+    .swiper-slide {
+      position: relative;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .carousel-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      opacity: 0;
+      animation: fadeInText 3s ease-in-out forwards;
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translate(-50%, -50%) translateY(30px); }
+      50% { opacity: 0.5; transform: translate(-50%, -50%) translateY(0); }
+      100% { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Home Section -->
+  <div class="home-section">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/4199046/pexels-photo-4199046.jpeg" alt="Agriculture 1">
+          <div class="carousel-text">Innovation in Agriculture</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/30537079/pexels-photo-30537079.jpeg" alt="Agriculture 2">
+          <div class="carousel-text">Sustainable Practices</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/20317202/pexels-photo-20317202.jpeg" alt="Agriculture 3">
+          <div class="carousel-text">Agriculture at its Best</div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+  
+  <!-- Swiper.js Initialization -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: { delay: 2500, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      loop: true,
+      speed: 1000,
+      effect: "slide",
+    });
+  </script>
+  
+</body>
+</html>

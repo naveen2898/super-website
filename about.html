@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRPS Nexus - Agriculture Startup</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* About Us Section */
+    .about-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 50px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 50px;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+      text-align: left;
+      padding-right: 20px;
+    }
+
+    .about-text h2 {
+      font-size: 2.5rem;
+      color: #005f73;
+    }
+
+    .about-text p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 500px;
+      line-height: 1.5;
+    }
+
+    .about-section img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid #00b4db;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 50px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .services-section h2 {
+      font-size: 2.5rem;
+      color: #005f73;
+    }
+
+    .services-section p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .services-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .service-box {
+  width: 180px;
+  height: 200px;
+  position: relative;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.service-box .front,
+.service-box .back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12px;
+  transition: transform 0.6s ease-in-out;
+}
+
+.service-box .front {
+  background: linear-gradient(135deg, #00b4db, #0083b0);
+  color: white;
+}
+
+.service-box .front h4 {
+  font-size: 1rem; /* Smaller text */
+  font-weight: bold;
+  position: absolute;
+  top: 35px; /* Adjust this to move text closer to the image */
+  text-align: center;
+  width: 100%;
+}
+
+.service-box .front img {
+  width: 60%;
+  height: auto;
+  border-radius: 8px;
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+.service-box .back {
+  background: white;
+  color: #333;
+  border: 2px solid #0083b0;
+  transform: rotateY(180deg);
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.service-box:hover .front {
+  transform: rotateY(180deg);
+}
+
+.service-box:hover .back {
+  transform: rotateY(0);
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="container" id="about">
+    <div class="about-section">
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>WAt [Your Startup Name], we are revolutionizing the agricultural landscape by leveraging cutting-edge technology to empower farmers, optimize food production, and create a sustainable future for agriculture. Our mission is to bridge the gap between traditional farming practices and modern innovation, ensuring that farmers have access to the tools, knowledge, and resources they need to thrive in an ever-changing world.</p>
+      </div>
+      <img src="https://pixabay.com/get/gcba7707ce3cfb83407f2c62977ef93927cca38d8c47b063b06eac765ab1a99da457ad7fe920617e2be0ee45a7ea34e13ec0d2584037b2c0c52563a03f0e3f247d7cedecf3b1056695915bd6efb70ae82_1280.jpg?attachment=" alt="Company Image">
+    </div>
+    
+    <div class="services-section" id="services">
+      <h2>Our Services</h2>
+      <p>We provide innovative solutions that empower farmers and agricultural businesses.</p>
+      <div class="services-container">
+        <div class="service-box">
+          <div class="front"><h4 style="position: absolute; top: 10px; width: 100%; text-align: center;">Instant Market Pay</h4>
+            <img src="https://images.pexels.com/photos/4199046/pexels-photo-4199046.jpeg" 
+                 alt="Instant Market Pay" 
+                 style="width: 80%; height: auto; position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%); border-radius: 10px;"></div>
+          <div class="back">Agricultural Technology</div>
+        </div>
+        <div class="service-box">
+          <div class="front"><h>Prime auction pro</h>
+        <img src="C:\Users\NAVEEN CHANDAR\OneDrive\Pictures\Picture2.png"></div>
+          <div class="back">Sustainable Farming</div>
+        </div>
+        <div class="service-box">
+          <div class="front"><h>Prime auction pro</h>
+            <img src="C:\Users\NAVEEN CHANDAR\OneDrive\Pictures\Picture2.png"></div>
+          <div class="back">Market Insights</div>
+        </div>
+        <div class="service-box">
+          <div class="front">🚛</div>
+          <div class="back">Supply Chain Solutions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRPS Nexus - Agriculture Startup</title>
+
+  <!-- Swiper.js for Smooth Carousel -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://images.pexels.com/photos/96715/pexels-photo-96715.jpeg?cs=srgb&dl=pexels-alejandro-barron-21404-96715.jpg&fm=jpg&_gl=1*9rvub0*_ga*MTM3OTUzNDc3My4xNzM4ODU4MjI2*_ga_8JE65Q40S6*MTczODg2MzQ2Ny4yLjEuMTczODg2MzQ4NC4wLjAuMA..');
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      transition: background 3s ease-in-out; /* Smooth transition */
+    }
+
+    /* Company Section (Only Visible Initially) */
+    .company-container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    @keyframes textFadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      50% { opacity: 0.5; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .company-name {
+      font-size: 4rem;
+      font-style: italic;
+      text-transform: uppercase;
+      animation: textFadeIn 2s ease-in-out forwards;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: lightgreen;
+    }
+
+    /* Home Section (Initially Hidden) */
+    .home-section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+      background: linear-gradient(to right, #00b4db, #0083b0);
+    }
+
+    /* Carousel */
+    .swiper {
+      width: 100%;
+      max-width: 1200px;
+      height: 500px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 50px auto;
+    }
+
+    .swiper-slide {
+      position: relative;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .carousel-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      animation: fadeInText 3s ease-in-out forwards;
+      opacity: 0; /* Start with hidden text */
+    }
+
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translate(-50%, -50%) translateY(30px); }
+      50% { opacity: 0.5; transform: translate(-50%, -50%) translateY(0); }
+      100% { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
+    }
+
+    /* Sections */
+    .section {
+      display: none;
+      padding: 50px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      margin: 80px auto;
+      width: 80%;
+      color: black;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .about-section img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: 20px;
+    }
+
+    .services-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .service-box {
+      width: 150px;
+      height: 150px;
+      margin: 10px;
+      background: lightgray;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      position: relative;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .service-box:hover {
+      transform: rotateY(180deg);
+    }
+
+    .service-box .front,
+    .service-box .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      transition: transform 0.5s;
+    }
+
+    .service-box .back {
+      background: #00b4db;
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body id="page">
+
+  <!-- Company Name Section (Visible Initially) -->
+  <div class="company-container">
+    <div class="company-name">CRPS Nexus</div>
+  </div>
+
+  <!-- Navbar -->
+  <nav>
+    <a onclick="showhome_section()">Home</a>
+    <a onclick="showSection('about')">About</a>
+    <a onclick="showSection('services')">Services</a>
+    <a onclick="showSection('contact')">Contact</a>
+  </nav>
+
+  <!-- Home Section (Hidden Initially) -->
+  <div id="home" class="home-section">
+    <!-- Image Carousel -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/4199046/pexels-photo-4199046.jpeg?cs=srgb&dl=pexels-jack-sparrow-4199046.jpg&fm=jpg&_gl=1*1mstqt2*_ga*MTM3OTUzNDc3My4xNzM4ODU4MjI2*_ga_8JE65Q40S6*MTczODg1ODIyNS4xLjEuMTczODg1ODI2Ni4wLjAuMA.." alt="Agriculture 1">
+          <div class="carousel-text">Innovation in Agriculture</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/30537079/pexels-photo-30537079.jpeg?cs=srgb&dl=pexels-timotei-dumbraveanu-1985400973-30537079.jpg&fm=jpg&_gl=1*sb8e4j*_ga*MTM3OTUzNDc3My4xNzM4ODU4MjI2*_ga_8JE65Q40S6*MTczODg1ODIyNS4xLjEuMTczODg1ODM2Ni4wLjAuMA.." alt="Agriculture 2">
+          <div class="carousel-text">Sustainable Practices</div>
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/20317202/pexels-photo-20317202.jpeg?cs=srgb&dl=pexels-equalstock-20317202.jpg&fm=jpg&_gl=1*12kg84a*_ga*MTM3OTUzNDc3My4xNzM4ODU4MjI2*_ga_8JE65Q40S6*MTczODg1ODIyNS4xLjEuMTczODg1ODUwOC4wLjAuMA.." alt="Agriculture 3">
+          <div class="carousel-text">Agriculture at its Best</div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div id="about" class="section">
+    <h2>About Us</h2>
+    <p>Sample content about the company goes here. This section provides details about our mission and values.</p>
+    <img src="https://via.placeholder.com/200" alt="Company Image">
+  </div>
+
+  <!-- Services Section -->
+  <div id="services" class="section">
+    <h2>Our Services</h2>
+    <p>Brief description of the services provided by the company.</p>
+    <div class="services-container">
+      <div class="service-box">
+        <div class="front">🚜</div>
+        <div class="back">Agricultural Technology</div>
+      </div>
+      <div class="service-box">
+        <div class="front">🌱</div>
+        <div class="back">Sustainable Farming</div>
+      </div>
+      <div class="service-box">
+        <div class="front">📈</div>
+        <div class="back">Market Insights</div>
+      </div>
+      <div class="service-box">
+        <div class="front">🚛</div>
+        <div class="back">Supply Chain Solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div id="contact" class="section">
+    <h2>Contact Us</h2>
+    <p>Feel free to reach out to us for any inquiries or collaborations.</p>
+  </div>
+
+  <!-- JavaScript for Section Handling -->
+  <script>
+    // Swiper.js Initialization
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: { delay: 2500, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      loop: true,
+      speed: 1000,
+      effect: "slide",
+    });
+
+    // Function to show the home section
+    function showhome_section() {
+      // Hide all sections
+      var sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Show the home section
+      document.getElementById('home').style.opacity = '1';
+      document.getElementById('home').style.transform = 'translateY(0)';
+    }
+
+    // Function to show other sections
+    function showSection(sectionId) {
+      // Hide the home section
+      document.getElementById('home').style.opacity = '0';
+      document.getElementById('home').style.transform = 'translateY(50px)';
+
+      // Hide all sections
+      var sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Show the selected section
+      document.getElementById(sectionId).classList.add('active');
+    }
+  </script>
+</body>
+</html>

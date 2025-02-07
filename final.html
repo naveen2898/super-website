@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRPS Nexus - Agriculture Startup</title>
+  
+  <!-- Swiper.js for Smooth Carousel -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Lucida Console", "Courier New", monospace;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Full-screen background container */
+    #background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .background.active {
+      opacity: 1;
+    }
+
+    /* Front Page (with Animated Background) */
+    #front-page {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .company-name {
+      font-size: 30px;
+      font-style: italic;
+      text-transform: uppercase;
+      color: whitesmoke;
+      animation: fadeIn 2s ease-in-out forwards;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px 20px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      cursor: pointer;
+      margin-left: 20px;
+    }
+
+    .logo img {
+      width: 100px; /* Adjust size */
+      height: auto;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .logo img:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-links {
+      display: flex;
+      margin-right: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      color: lightgreen;
+    }
+
+    /* Home Page (Initially Hidden) */
+    #home-page {
+      display: none;
+      background: linear-gradient(to right, #00b4db, #0083b0);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    /* Image Carousel */
+    .swiper {
+      width: 100%;
+      max-width: 1300px;
+      height: 550px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 50px auto;
+      padding-top: 90px;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f4f4;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* About Us Section */
+    .about-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 50px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-top: 150px;
+      margin-left: 100px;
+      max-width: 1500px;
+      min-height: 600px;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+      text-align: left;
+      padding-right: 20px;
+    }
+
+    .about-text h2 {
+      font-size: 2.5rem;
+      color: #005f73;
+    }
+
+    .about-text p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 500px;
+      line-height: 1.5;
+    }
+
+    .about-section img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid #00b4db;
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 50px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin: 120px auto;
+      max-width: 1200px;
+      text-align: center; /* Center-align text */
+    }
+
+    .services-header {
+      margin-bottom: 55px; /* Space below the header */
+    }
+
+    .services-header h2 {
+      font-size: 2.5rem;
+      color: #005f73;
+      margin-bottom: 10px; /* Space below heading */
+    }
+
+    .services-header p {
+      font-size: 1.2rem;
+      color: #555;
+      margin: 50px; /* Remove default margin */
+    }
+
+    .services-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Space between rows */
+      align-items: center; /* Center-align rows */
+    }
+
+    .service-row {
+      display: flex;
+      gap: 20px; /* Space between boxes in a row */
+      justify-content: center; /* Center-align boxes in a row */
+    }
+
+    .service-box {
+      width: 250px; /* Fixed width for each box */
+      height: 200px; /* Fixed height for each box */
+      position: relative;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .service-box .front,
+    .service-box .back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 12px;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .service-box .front {
+      background: linear-gradient(135deg, #00b4db, #0083b0);
+      color: white;
+    }
+
+    .service-box .front h4 {
+      font-size: 1rem;
+      font-weight: bold;
+      position: absolute;
+      top: 20px; /* Adjust text position */
+      text-align: center;
+      width: 100%;
+    }
+
+    .service-box .front img {
+      width: 60%;
+      height: auto;
+      border-radius: 8px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .service-box .back {
+      background: white;
+      color: #333;
+      border: 2px solid #0083b0;
+      transform: rotateY(180deg);
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .service-box:hover .front {
+      transform: rotateY(180deg);
+    }
+
+    .service-box:hover .back {
+      transform: rotateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Front Page -->
+  <div id="front-page">
+    <div id="background-container">
+      <div class="background active"></div>
+      <div class="background"></div>
+      <div class="background"></div>
+    </div>
+    <div class="company-name">
+      <h1>Emerging AgriTech Startup</h1>
+      <h3>We aim to revolutionize the Agri Output supply chain</h3>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo" onclick="goToFrontPage()">
+      <img src="C:\Users\NAVEEN CHANDAR\OneDrive\Pictures\Picture1.png" alt="Logo">
+    </div>
+    <div class="nav-links">
+      <a onclick="showHome()">Home</a>
+      <a onclick="showAbout()">About</a>
+      <a onclick="showServices()">Services</a>
+      <a onclick="showSection('contact-page')">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Home Page -->
+  <div id="home-page">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/4199046/pexels-photo-4199046.jpeg" alt="Agriculture 1">
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/30537079/pexels-photo-30537079.jpeg" alt="Agriculture 2">
+        </div>
+        <div class="swiper-slide">
+          <img src="https://images.pexels.com/photos/20317202/pexels-photo-20317202.jpeg" alt="Agriculture 3">
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+
+  <!-- About Page -->
+  <div class="container" id="about-page" style="display: none;">
+    <div class="about-section">
+      <div class="about-text">
+        <h2>About Us</h2>
+        <p>At [Your Startup Name], we are revolutionizing the agricultural landscape by leveraging cutting-edge technology to empower farmers, optimize food production, and create a sustainable future for agriculture. Our mission is to bridge the gap between traditional farming practices and modern innovation, ensuring that farmers have access to the tools, knowledge, and resources they need to thrive in an ever-changing world.</p>
+      </div>
+      <img src="https://pixabay.com/get/gcba7707ce3cfb83407f2c62977ef93927cca38d8c47b063b06eac765ab1a99da457ad7fe920617e2be0ee45a7ea34e13ec0d2584037b2c0c52563a03f0e3f247d7cedecf3b1056695915bd6efb70ae82_1280.jpg" alt="Company Image">
+    </div>
+  </div>
+
+  <!-- Services Page -->
+  <div class="services-section" id="services-page" style="display: none;">
+    <div class="services-header">
+      <h2>Our Services</h2>
+      <p>We provide innovative solutions that empower farmers and agricultural businesses.</p>
+    </div>
+    <div class="services-container">
+      <!-- First Row -->
+      <div class="service-row">
+        <div class="service-box">
+          <div class="front">
+            <h4>Instant Market Pay</h4>
+            <img src="https://images.pexels.com/photos/4199046/pexels-photo-4199046.jpeg" alt="Instant Market Pay">
+          </div>
+          <div class="back">Agricultural Technology</div>
+        </div>
+        <div class="service-box">
+          <div class="front">
+            <h4>Prime Auction Pro</h4>
+            <img src="C:\Users\NAVEEN CHANDAR\OneDrive\Pictures\Picture2.png" alt="Prime Auction Pro">
+          </div>
+          <div class="back">Sustainable Farming</div>
+        </div>
+      </div>
+      <!-- Second Row -->
+      <div class="service-row">
+        <div class="service-box">
+          <div class="front">
+            <h4>Prime Auction Pro</h4>
+            <img src="C:\Users\NAVEEN CHANDAR\OneDrive\Pictures\Picture2.png" alt="Prime Auction Pro">
+          </div>
+          <div class="back">Market Insights</div>
+        </div>
+        <div class="service-box">
+          <div class="front">🚛</div>
+          <div class="back">Supply Chain Solutions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const images = [
+        "https://images.pexels.com/photos/30537079/pexels-photo-30537079.jpeg",
+        "https://images.pexels.com/photos/96715/pexels-photo-96715.jpeg",
+        "https://images.pexels.com/photos/209289/pexels-photo-209289.jpeg"
+      ];
+
+      let currentIndex = 0;
+      const backgrounds = document.querySelectorAll(".background");
+
+      function changeBackground() {
+        const nextIndex = (currentIndex + 1) % images.length;
+
+        // Set background image BEFORE fading in
+        backgrounds[nextIndex].style.backgroundImage = `url(${images[nextIndex]})`;
+
+        // Fade out current background
+        backgrounds[currentIndex].classList.remove("active");
+
+        // Fade in new background
+        backgrounds[nextIndex].classList.add("active");
+
+        // Update current index
+        currentIndex = nextIndex;
+      }
+
+      // Initialize first background
+      backgrounds[0].style.backgroundImage = `url(${images[0]})`;
+      backgrounds[1].style.backgroundImage = `url(${images[1]})`;
+      backgrounds[2].style.backgroundImage = `url(${images[2]})`;
+
+      // Start interval for changing backgrounds
+      setInterval(changeBackground, 5000);
+    };
+
+    // Show Home Page
+    function showHome() {
+      document.getElementById("front-page").style.display = "none";
+      document.getElementById("home-page").style.display = "flex";
+      document.getElementById("about-page").style.display = "none";
+      document.getElementById("services-page").style.display = "none";
+    }
+
+    // Show About Page
+    function showAbout() {
+      document.getElementById("front-page").style.display = "none";
+      document.getElementById("home-page").style.display = "none";
+      document.getElementById("about-page").style.display = "flex";
+      document.getElementById("services-page").style.display = "none";
+    }
+
+    // Show Services Page
+    function showServices() {
+      document.getElementById("front-page").style.display = "none";
+      document.getElementById("home-page").style.display = "none";
+      document.getElementById("about-page").style.display = "none";
+      document.getElementById("services-page").style.display = "flex";
+    }
+
+    // Function to return to the Front Page
+    function goToFrontPage() {
+      document.getElementById("front-page").style.display = "flex";
+      document.getElementById("home-page").style.display = "none";
+      document.getElementById("about-page").style.display = "none";
+      document.getElementById("services-page").style.display = "none";
+    }
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: { delay: 2500, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      loop: true,
+      speed: 1000,
+      effect: "slide",
+    });
+  </script>
+
+</body>
+</html>
